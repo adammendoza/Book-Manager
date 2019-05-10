@@ -17,9 +17,15 @@ public final class MappingNames {
 
     // Award
     public static final String AWARDS = "awards";
-    public static final String ADD_AWARD = "addAwards";
-    public static final String DELETE_AWARD = "deleteAwards";
-    public static final String VIEW_AWARD = "viewAwards";
+    public static final String ADD_AWARD = "addAward";
+    public static final String DELETE_AWARD = "deleteAward";
+    public static final String VIEW_AWARD = "viewAward";
+
+    // Book
+    public static final String BOOKS = "books";
+    public static final String ADD_BOOK = "addBook";
+    public static final String DELETE_BOOK = "deleteBook";
+    public static final String VIEW_BOOK = "viewBook";
 
     // == constructors ==
     private MappingNames() {}

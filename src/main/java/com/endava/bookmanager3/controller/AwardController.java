@@ -77,7 +77,7 @@ public class AwardController {
 
 
     @DeleteMapping(MappingNames.DELETE_AWARD)
-    public String deleteGenre(@RequestParam Long id) {
+    public String deleteAward(@RequestParam Long id) {
         awardService.deleteAwardById(id);
         return "redirect:/" + MappingNames.AWARDS;
     }

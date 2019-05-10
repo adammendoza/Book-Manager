@@ -16,6 +16,10 @@ public final class AttributeNames {
     public static final String AWARDS = "awards";
     public static final String AWARD = "award";
 
+    // Book
+    public static final String BOOKS = "books";
+    public static final String BOOK = "book";
+
     // == constructors ==
     private AttributeNames() {}
 }

@@ -20,6 +20,11 @@ public final class ViewNames {
     public static final String ADD_AWARD = "add_award";
     public static final String VIEW_AWARD = "view_award";
 
+    // Book
+    public static final String BOOKS = "books";
+    public static final String ADD_BOOK = "add_book";
+    public static final String VIEW_BOOK = "view_book";
+
     // == constructors ==
     private ViewNames() {}
 }
