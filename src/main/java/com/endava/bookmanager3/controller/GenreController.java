@@ -1,9 +1,7 @@
 package com.endava.bookmanager3.controller;
 
 import com.endava.bookmanager3.exception.ResourceNotFoundException;
-import com.endava.bookmanager3.model.Author;
 import com.endava.bookmanager3.model.Genre;
-import com.endava.bookmanager3.service.AuthorService;
 import com.endava.bookmanager3.service.GenreService;
 import com.endava.bookmanager3.util.AttributeNames;
 import com.endava.bookmanager3.util.MappingNames;

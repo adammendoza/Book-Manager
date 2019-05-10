@@ -15,6 +15,12 @@ public final class MappingNames {
     public static final String DELETE_GENRE = "deleteGenre";
     public static final String VIEW_GENRE = "viewGenre";
 
+    // Award
+    public static final String AWARDS = "awards";
+    public static final String ADD_AWARD = "addAwards";
+    public static final String DELETE_AWARD = "deleteAwards";
+    public static final String VIEW_AWARD = "viewAwards";
+
     // == constructors ==
     private MappingNames() {}
 }

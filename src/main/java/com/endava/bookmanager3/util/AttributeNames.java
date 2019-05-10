@@ -12,6 +12,10 @@ public final class AttributeNames {
     public static final String GENRES = "genres";
     public static final String GENRE = "genre";
 
+    // Award
+    public static final String AWARDS = "awards";
+    public static final String AWARD = "award";
+
     // == constructors ==
     private AttributeNames() {}
 }
