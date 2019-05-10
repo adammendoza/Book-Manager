@@ -26,8 +26,6 @@ public class Book extends UserDateAudit {
 
     private String description;
 
-    private String originalTitle;
-
     @NotBlank
     @ISBN
     private String ISBN;

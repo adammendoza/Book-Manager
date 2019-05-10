@@ -27,4 +27,6 @@ public class Author implements Serializable {
     @Size(max = 40)
     @Email
     private String email;
+
+    private String description;
 }
