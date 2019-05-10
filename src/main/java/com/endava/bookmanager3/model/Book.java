@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.model;
 
-import com.endava.bookmanager3.model.audit.UserDateAudit;
+import com.endava.bookmanager3.model.audit.DateAudit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "books")
 @Data
-public class Book extends UserDateAudit {
+public class Book extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,9 @@ public class Book extends UserDateAudit {
     private String title;
 
     private String description;
+
+    @Lob
+    private Byte[] image;
 
     @NotBlank
     @ISBN
