@@ -28,7 +28,7 @@ public class BookService implements IBookService {
 
     public Book getBookById(Long id) {
 
-        return bookRepository.getOne(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     public void addBook(Book bookToAdd) {
@@ -36,9 +36,9 @@ public class BookService implements IBookService {
         bookRepository.save(bookToAdd);
     }
 
-    public void updateAward(Book modifiedBook) {
+    public void updateBook(Book modifiedBook) {
 
-        Book bookToUpdate = bookRepository.getOne(modifiedBook.getId());
+        Book bookToUpdate = bookRepository.findById(modifiedBook.getId()).orElse(null);
 
         if (bookToUpdate == null) {
             throw new AppException("Book to update not found!");
@@ -48,15 +48,15 @@ public class BookService implements IBookService {
         bookToUpdate.setDescription(modifiedBook.getDescription());
         bookToUpdate.setImage(modifiedBook.getImage());
         bookToUpdate.setISBN(modifiedBook.getISBN());
-        //bookToUpdate.setAuthor(modifiedBook.getAuthor());
-        //bookToUpdate.setAwards(modifiedBook.getAwards());
-        //bookToUpdate.setGenres(modifiedBook.getGenres());
+        bookToUpdate.setAuthor(modifiedBook.getAuthor());
+        bookToUpdate.setAwards(modifiedBook.getAwards());
+        bookToUpdate.setGenres(modifiedBook.getGenres());
         bookRepository.save(bookToUpdate);
     }
 
     public void deleteBookById(Long id) {
 
-        Book bookToDelete = bookRepository.getOne(id);
+        Book bookToDelete = bookRepository.findById(id).orElse(null);
 
         if (bookToDelete == null)
             throw new AppException("Book to delete not found!");

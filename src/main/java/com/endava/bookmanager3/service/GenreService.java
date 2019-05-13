@@ -26,7 +26,7 @@ public class GenreService {
 
     public Genre getGenreById(Long id) {
 
-        return genreRepository.getOne(id);
+        return genreRepository.findById(id).orElse(null);
     }
 
     public void addGenre(Genre genreToAdd) {
@@ -36,7 +36,7 @@ public class GenreService {
 
     public void updateGenre(Genre modifiedGenre) {
 
-        Genre genreToUpdate = genreRepository.getOne(modifiedGenre.getId());
+        Genre genreToUpdate = genreRepository.findById(modifiedGenre.getId()).orElse(null);
 
         if (genreToUpdate == null) {
             throw new AppException("Genre to update not found!");
@@ -49,7 +49,7 @@ public class GenreService {
 
     public void deleteGenreById(Long id) {
 
-        Genre genreToDelete = genreRepository.getOne(id);
+        Genre genreToDelete = genreRepository.findById(id).orElse(null);
 
         if (genreToDelete == null)
             throw new AppException("Genre to delete not found!");

@@ -5,12 +5,12 @@ import com.endava.bookmanager3.model.User;
 import com.endava.bookmanager3.payload.UserIdentityAvailability;
 import com.endava.bookmanager3.payload.UserSummary;
 import com.endava.bookmanager3.security.CurrentUser;
-import com.endava.bookmanager3.security.UserPrincipal;
+//import com.endava.bookmanager3.security.UserPrincipal;
 import com.endava.bookmanager3.service.IBookService;
 import com.endava.bookmanager3.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,12 +27,15 @@ public class UserController {
         this.bookService = bookService;
     }
 
+    /*
     @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
+    // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
         return userSummary;
     }
+
+     */
 
     @GetMapping("/user/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {

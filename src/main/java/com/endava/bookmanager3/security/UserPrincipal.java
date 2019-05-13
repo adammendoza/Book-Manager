@@ -1,3 +1,4 @@
+/*
 package com.endava.bookmanager3.security;
 
 import com.endava.bookmanager3.model.User;
@@ -72,3 +73,4 @@ public class UserPrincipal implements UserDetails {
         return true;
     }
 }
+*/

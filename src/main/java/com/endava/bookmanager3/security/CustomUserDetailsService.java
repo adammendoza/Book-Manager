@@ -1,3 +1,4 @@
+/*
 package com.endava.bookmanager3.security;
 
 import com.endava.bookmanager3.model.User;
@@ -38,3 +39,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return UserPrincipal.create(user);
     }
 }
+*/

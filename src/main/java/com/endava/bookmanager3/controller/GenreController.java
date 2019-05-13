@@ -66,7 +66,7 @@ public class GenreController {
     @PostMapping(MappingNames.ADD_GENRE)
     public String processGenre(@Valid @ModelAttribute(AttributeNames.GENRE) Genre genre) {
 
-        if (genre.getId() == 0) {
+        if (genre.getId() == null) {
             genreService.addGenre(genre);
         } else {
             genreService.updateGenre(genre);

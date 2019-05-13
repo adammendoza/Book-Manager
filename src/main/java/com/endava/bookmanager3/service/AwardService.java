@@ -26,7 +26,7 @@ public class AwardService {
 
     public Award getAwardById(Long id) {
 
-        return awardRepository.getOne(id);
+        return awardRepository.findById(id).orElse(null);
     }
 
     public void addAward(Award awardToAdd) {
@@ -36,7 +36,7 @@ public class AwardService {
 
     public void updateAward(Award modifiedAward) {
 
-        Award awardToUpdate = awardRepository.getOne(modifiedAward.getId());
+        Award awardToUpdate = awardRepository.findById(modifiedAward.getId()).orElse(null);
 
         if (awardToUpdate == null) {
             throw new AppException("Award to update not found!");
@@ -49,7 +49,7 @@ public class AwardService {
 
     public void deleteAwardById(Long id) {
 
-        Award awardToDelete = awardRepository.getOne(id);
+        Award awardToDelete = awardRepository.findById(id).orElse(null);
 
         if (awardToDelete == null)
             throw new AppException("Award to delete not found!");

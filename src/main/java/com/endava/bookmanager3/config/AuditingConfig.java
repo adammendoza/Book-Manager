@@ -1,3 +1,4 @@
+/*
 package com.endava.bookmanager3.config;
 
 import com.endava.bookmanager3.security.UserPrincipal;
@@ -40,3 +41,5 @@ class SpringSecurityAuditAwareImpl implements AuditorAware<Long> {
         return Optional.ofNullable(userPrincipal.getId());
     }
 }
+
+ */

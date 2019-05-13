@@ -1,3 +1,4 @@
+/*
 package com.endava.bookmanager3.security;
 
 import io.jsonwebtoken.*;
@@ -60,3 +61,4 @@ public class JwtTokenProvider {
         return false;
     }
 }
+*/

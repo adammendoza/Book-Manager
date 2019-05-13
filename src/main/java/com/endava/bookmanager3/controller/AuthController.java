@@ -1,4 +1,5 @@
-package com.endava.bookmanager3.controller;
+
+/*package com.endava.bookmanager3.controller;
 
 import com.endava.bookmanager3.exception.AppException;
 import com.endava.bookmanager3.model.Role;
@@ -96,3 +97,4 @@ public class AuthController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 }
+*/

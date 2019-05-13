@@ -66,7 +66,7 @@ public class AwardController {
     @PostMapping(MappingNames.ADD_AWARD)
     public String processAward(@Valid @ModelAttribute(AttributeNames.AWARD) Award award) {
 
-        if (award.getId() == 0) {
+        if (award.getId() == null) {
             awardService.addAward(award);
         } else {
             awardService.updateAward(award);

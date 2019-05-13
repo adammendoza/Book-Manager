@@ -25,7 +25,8 @@ public class AuthorService {
     }
 
     public Author getAuthorById(Long id) {
-        return authorRepository.getOne(id);
+
+        return authorRepository.findById(id).orElse(null);
     }
 
     public void addAuthor(Author authorToAdd) {
@@ -34,7 +35,7 @@ public class AuthorService {
 
     public void updateAuthor(Author modifiedAuthor) {
 
-        Author authorToUpdate = authorRepository.getOne(modifiedAuthor.getId());
+        Author authorToUpdate = authorRepository.findById(modifiedAuthor.getId()).orElse(null);
 
         if (authorToUpdate == null) {
             throw new AppException("Author to update not found!");
@@ -47,7 +48,7 @@ public class AuthorService {
 
     public void deleteAuthorById(Long id) {
 
-        Author authorToDelete = authorRepository.getOne(id);
+        Author authorToDelete = authorRepository.findById(id).orElse(null);
 
         if (authorToDelete == null)
             throw new AppException("Author to delete not found!");
