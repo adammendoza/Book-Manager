@@ -21,6 +21,7 @@ public class Review extends DateAudit {
     private Long id;
 
     @NotBlank
+    @Column(length = 4000)
     public String description;
 
     @NotNull

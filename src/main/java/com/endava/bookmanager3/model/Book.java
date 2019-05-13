@@ -24,6 +24,7 @@ public class Book extends DateAudit {
     @NotBlank
     private String title;
 
+    @Column(length = 4000)
     private String description;
 
     @Lob

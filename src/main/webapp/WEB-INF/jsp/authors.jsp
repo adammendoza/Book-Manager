@@ -41,6 +41,7 @@
             <tr>
                 <td>${author.name}</td>
                 <td>${author.email}</td>
+                <td>${author.description}</td>
                 <td><a href="${viewUrl}">View</a></td>
                 <td><a href="${editUrl}">Edit</a></td>
                 <td><a href="${deleteUrl}">Delete</a></td>

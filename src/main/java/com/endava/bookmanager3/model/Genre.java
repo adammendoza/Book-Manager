@@ -19,6 +19,7 @@ public class Genre {
     @NotBlank
     private String name;
 
+    @Column(length = 4000)
     private String description;
 
     @ManyToMany(fetch = FetchType.LAZY,

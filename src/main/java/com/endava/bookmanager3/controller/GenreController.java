@@ -76,7 +76,7 @@ public class GenreController {
     }
 
 
-    @DeleteMapping(MappingNames.DELETE_GENRE)
+    @GetMapping(MappingNames.DELETE_GENRE)
     public String deleteGenre(@RequestParam Long id) {
         genreService.deleteGenreById(id);
         return "redirect:/" + MappingNames.GENRES;

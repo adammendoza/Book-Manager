@@ -4,12 +4,12 @@
 <%@ page import="com.endava.bookmanager3.util.AttributeNames" %>
 <html>
 <head>
-    <title>Add Genre</title>
+    <title>Add Book</title>
 </head>
 
 <body>
 <div align="center">
-    <form:form method="POST" modelAttribute="${AttributeNames.GENRE}">
+    <form:form method="POST" modelAttribute="${AttributeNames.BOOK}">
         <table>
             <tr>
                 <td><label>ID</label></td>

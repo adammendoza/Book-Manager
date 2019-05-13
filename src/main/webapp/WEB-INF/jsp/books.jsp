@@ -3,18 +3,18 @@
 <%@ page import="com.endava.bookmanager3.util.MappingNames" %>
 <html>
 <head>
-    <title>Genres</title>
+    <title>Books</title>
 </head>
 
 <body>
 <div align="center">
 
-    <c:url var="addUrl" value="${MappingNames.ADD_GENRE}"/>
+    <c:url var="addUrl" value="${MappingNames.ADD_BOOK}"/>
 
-    <a href="${addUrl}">New Genre</a>
+    <a href="${addUrl}">New Book</a>
 
     <table border="1" cellpadding="5">
-        <caption><h2>Genres</h2></caption>
+        <caption><h2>Books</h2></caption>
 
         <tr>
             <th>Name</th>
@@ -24,23 +24,23 @@
             <th>Delete</th>
         </tr>
 
-        <c:forEach var="genre" items="${genres}">
+        <c:forEach var="book" items="${books}">
 
-            <c:url var="viewUrl" value="${MappingNames.VIEW_GENRE}">
-                <c:param name="id" value="${genre.id}"/>
+            <c:url var="viewUrl" value="${MappingNames.VIEW_BOOK}">
+                <c:param name="id" value="${book.id}"/>
             </c:url>
 
-            <c:url var="editUrl" value="${MappingNames.ADD_GENRE}">
-                <c:param name="id" value="${genre.id}"/>
+            <c:url var="editUrl" value="${MappingNames.ADD_BOOK}">
+                <c:param name="id" value="${book.id}"/>
             </c:url>
 
-            <c:url var="deleteUrl" value="${MappingNames.DELETE_GENRE}">
+            <c:url var="deleteUrl" value="${MappingNames.DELETE_BOOK}">
                 <c:param name="id" value="${genre.id}"/>
             </c:url>
 
             <tr>
-                <td>${genre.name}</td>
-                <td>${genre.description}</td>
+                <td>${book.name}</td>
+                <td>${book.description}</td>
                 <td><a href="${viewUrl}">View</a></td>
                 <td><a href="${editUrl}">Edit</a></td>
                 <td><a href="${deleteUrl}">Delete</a></td>

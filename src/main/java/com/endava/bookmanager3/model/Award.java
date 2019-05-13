@@ -1,9 +1,11 @@
 package com.endava.bookmanager3.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Clob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +21,7 @@ public class Award {
     @NotBlank
     private String name;
 
+    @Column(length = 4000)
     private String description;
 
 

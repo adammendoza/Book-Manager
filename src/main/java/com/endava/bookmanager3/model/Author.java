@@ -28,5 +28,6 @@ public class Author implements Serializable {
     @Email
     private String email;
 
+    @Column(length = 4000)
     private String description;
 }

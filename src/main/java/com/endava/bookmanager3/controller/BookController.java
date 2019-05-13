@@ -76,7 +76,7 @@ public class BookController {
     }
 
 
-    @DeleteMapping(MappingNames.DELETE_BOOK)
+    @GetMapping(MappingNames.DELETE_BOOK)
     public String deleteBook(@RequestParam Long id) {
         bookService.deleteBookById(id);
         return "redirect:/" + MappingNames.BOOKS;

@@ -12,19 +12,19 @@
         <tr>
             <td><label>ID</label></td>
             <td>
-                <c:out value="${author.id}"/>
+                <c:out value="${genre.id}"/>
             </td>
         </tr>
         <tr>
             <td><label>Name</label></td>
             <td>
-                <c:out value="${author.name}"/>
+                <c:out value="${genre.name}"/>
             </td>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td>
-                <c:out value="${author.description}"/>
+                <c:out value="${genre.description}"/>
             </td>
         </tr>
     </table>

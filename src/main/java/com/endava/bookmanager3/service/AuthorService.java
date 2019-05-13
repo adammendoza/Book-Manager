@@ -43,6 +43,7 @@ public class AuthorService {
 
         authorToUpdate.setName(modifiedAuthor.getName());
         authorToUpdate.setEmail(modifiedAuthor.getEmail());
+        authorToUpdate.setDescription(modifiedAuthor.getDescription());
         authorRepository.save(authorToUpdate);
     }
 

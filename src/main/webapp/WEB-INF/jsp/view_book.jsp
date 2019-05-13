@@ -3,7 +3,7 @@
 <%@ page import="com.endava.bookmanager3.util.MappingNames" %>
 <html>
 <head>
-    <title>View Genre</title>
+    <title>View Book</title>
 </head>
 
 <body>
@@ -12,24 +12,24 @@
         <tr>
             <td><label>ID</label></td>
             <td>
-                <c:out value="${author.id}"/>
+                <c:out value="${book.id}"/>
             </td>
         </tr>
         <tr>
             <td><label>Name</label></td>
             <td>
-                <c:out value="${author.name}"/>
+                <c:out value="${book.name}"/>
             </td>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td>
-                <c:out value="${author.description}"/>
+                <c:out value="${book.description}"/>
             </td>
         </tr>
     </table>
 
-    <c:url var="tableUrl" value="${MappingNames.GENRES}"/>
+    <c:url var="tableUrl" value="${MappingNames.BOOKS}"/>
     <a href="${tableUrl}">Show Table</a>
 
 </div>
