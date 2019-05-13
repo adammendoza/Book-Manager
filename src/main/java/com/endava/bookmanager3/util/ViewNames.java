@@ -25,6 +25,12 @@ public final class ViewNames {
     public static final String ADD_BOOK = "add_book";
     public static final String VIEW_BOOK = "view_book";
 
+    // Review
+    public static final String REVIEWS = "reviews";
+    public static final String ADD_REVIEW = "add_review";
+    public static final String VIEW_REVIEW = "view_review";
+
+
     // == constructors ==
     private ViewNames() {}
 }

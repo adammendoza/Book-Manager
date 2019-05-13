@@ -3,6 +3,7 @@ package com.endava.bookmanager3.util;
 public final class MappingNames {
 
     // == constants ==
+
     // Author
     public static final String AUTHORS = "authors";
     public static final String ADD_AUTHOR = "addAuthor";
@@ -26,6 +27,13 @@ public final class MappingNames {
     public static final String ADD_BOOK = "addBook";
     public static final String DELETE_BOOK = "deleteBook";
     public static final String VIEW_BOOK = "viewBook";
+
+    // Review
+    public static final String REVIEWS = "reviews";
+    public static final String ADD_REVIEW = "addReview";
+    public static final String DELETE_REVIEW = "deleteReview";
+    public static final String VIEW_REVIEW = "viewReview";
+
 
     // == constructors ==
     private MappingNames() {}

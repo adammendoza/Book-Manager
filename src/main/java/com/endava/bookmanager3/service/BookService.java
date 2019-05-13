@@ -1,7 +1,6 @@
 package com.endava.bookmanager3.service;
 
 import com.endava.bookmanager3.exception.AppException;
-import com.endava.bookmanager3.model.Award;
 import com.endava.bookmanager3.model.Book;
 import com.endava.bookmanager3.repository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;

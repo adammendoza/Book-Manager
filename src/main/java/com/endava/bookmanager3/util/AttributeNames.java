@@ -2,8 +2,8 @@ package com.endava.bookmanager3.util;
 
 public final class AttributeNames {
 
-
     // == constants ==
+
     // Author
     public static final String AUTHORS = "authors";
     public static final String AUTHOR = "author";
@@ -20,6 +20,11 @@ public final class AttributeNames {
     public static final String BOOKS = "books";
     public static final String BOOK = "book";
 
+    // Review
+    public static final String REVIEWS = "reviews";
+    public static final String REVIEW = "review";
+
+    
     // == constructors ==
     private AttributeNames() {}
 }

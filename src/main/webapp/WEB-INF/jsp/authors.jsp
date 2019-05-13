@@ -19,6 +19,7 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Description</th>
             <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
