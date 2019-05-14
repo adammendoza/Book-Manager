@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.service;
 
-import com.endava.bookmanager3.exception.AppException;
+import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Genre;
 import com.endava.bookmanager3.repository.IGenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +26,25 @@ public class GenreService {
 
     public Genre getGenreById(Long id) {
 
-        return genreRepository.findById(id).orElse(null);
+        return genreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Genre", "id", id));
     }
 
-    public void addGenre(Genre genreToAdd) {
+    public Genre addGenre(Genre genreToAdd) {
 
-        genreRepository.save(genreToAdd);
+        return genreRepository.save(genreToAdd);
     }
 
-    public void updateGenre(Genre modifiedGenre) {
+    public Genre updateGenre(Long id, Genre modifiedGenre) {
 
-        Genre genreToUpdate = genreRepository.findById(modifiedGenre.getId()).orElse(null);
-
-        if (genreToUpdate == null) {
-            throw new AppException("Genre to update not found!");
-        }
-
+        Genre genreToUpdate = genreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Genre", "id", id));
         genreToUpdate.setName(modifiedGenre.getName());
         genreToUpdate.setDescription(modifiedGenre.getDescription());
-        genreRepository.save(genreToUpdate);
+        return genreRepository.save(genreToUpdate);
     }
 
     public void deleteGenreById(Long id) {
 
-        Genre genreToDelete = genreRepository.findById(id).orElse(null);
-
-        if (genreToDelete == null)
-            throw new AppException("Genre to delete not found!");
-
+        Genre genreToDelete = genreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Genre", "id", id));
         genreRepository.delete(genreToDelete);
     }
 }

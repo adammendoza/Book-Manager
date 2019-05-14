@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.service;
 
-import com.endava.bookmanager3.exception.AppException;
+import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Book;
 import com.endava.bookmanager3.repository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +27,17 @@ public class BookService implements IBookService {
 
     public Book getBookById(Long id) {
 
-        return bookRepository.findById(id).orElse(null);
+        return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
     }
 
-    public void addBook(Book bookToAdd) {
+    public Book addBook(Book bookToAdd) {
 
-        bookRepository.save(bookToAdd);
+        return bookRepository.save(bookToAdd);
     }
 
-    public void updateBook(Book modifiedBook) {
+    public Book updateBook(Long id, Book modifiedBook) {
 
-        Book bookToUpdate = bookRepository.findById(modifiedBook.getId()).orElse(null);
-
-        if (bookToUpdate == null) {
-            throw new AppException("Book to update not found!");
-        }
-
+        Book bookToUpdate = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
         bookToUpdate.setTitle(modifiedBook.getTitle());
         bookToUpdate.setDescription(modifiedBook.getDescription());
         bookToUpdate.setImage(modifiedBook.getImage());
@@ -50,16 +45,12 @@ public class BookService implements IBookService {
         bookToUpdate.setAuthor(modifiedBook.getAuthor());
         bookToUpdate.setAwards(modifiedBook.getAwards());
         bookToUpdate.setGenres(modifiedBook.getGenres());
-        bookRepository.save(bookToUpdate);
+        return bookRepository.save(bookToUpdate);
     }
 
     public void deleteBookById(Long id) {
 
-        Book bookToDelete = bookRepository.findById(id).orElse(null);
-
-        if (bookToDelete == null)
-            throw new AppException("Book to delete not found!");
-
+        Book bookToDelete = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
         bookRepository.delete(bookToDelete);
     }
 }

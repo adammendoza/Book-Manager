@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.service;
 
-import com.endava.bookmanager3.exception.AppException;
+import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Award;
 import com.endava.bookmanager3.repository.IAwardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +26,25 @@ public class AwardService {
 
     public Award getAwardById(Long id) {
 
-        return awardRepository.findById(id).orElse(null);
+        return awardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Award", "id", id));
     }
 
-    public void addAward(Award awardToAdd) {
+    public Award addAward(Award awardToAdd) {
 
-        awardRepository.save(awardToAdd);
+        return awardRepository.save(awardToAdd);
     }
 
-    public void updateAward(Award modifiedAward) {
+    public Award updateAward(Long id, Award modifiedAward) {
 
-        Award awardToUpdate = awardRepository.findById(modifiedAward.getId()).orElse(null);
-
-        if (awardToUpdate == null) {
-            throw new AppException("Award to update not found!");
-        }
-
+        Award awardToUpdate = awardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Award", "id", id));
         awardToUpdate.setName(modifiedAward.getName());
         awardToUpdate.setDescription(modifiedAward.getDescription());
-        awardRepository.save(awardToUpdate);
+        return awardRepository.save(awardToUpdate);
     }
 
     public void deleteAwardById(Long id) {
 
-        Award awardToDelete = awardRepository.findById(id).orElse(null);
-
-        if (awardToDelete == null)
-            throw new AppException("Award to delete not found!");
-
+        Award awardToDelete = awardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Award", "id", id));
         awardRepository.delete(awardToDelete);
     }
 }

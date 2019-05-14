@@ -1,20 +1,16 @@
 package com.endava.bookmanager3.controller;
 
-import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Genre;
 import com.endava.bookmanager3.service.GenreService;
-import com.endava.bookmanager3.util.AttributeNames;
-import com.endava.bookmanager3.util.MappingNames;
-import com.endava.bookmanager3.util.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/genres")
 public class GenreController {
 
     private final GenreService genreService;
@@ -26,59 +22,36 @@ public class GenreController {
     }
 
 
-    @GetMapping(MappingNames.GENRES)
-    public String getGenres(Model model) {
+    @GetMapping
+    public List<Genre> getGenres() {
 
-        List<Genre> genres = genreService.getGenres();
-        model.addAttribute(AttributeNames.GENRES, genres);
-        return ViewNames.GENRES;
+        return genreService.getGenres();
     }
 
 
-    @GetMapping(MappingNames.VIEW_GENRE)
-    public String getGenre(@RequestParam Long id, Model model) {
+    @GetMapping("/{genreId}")
+    public Genre getGenre(@PathVariable Long genreId) {
 
-        Genre genre = genreService.getGenreById(id);
-
-        if (genre == null) {
-            throw new ResourceNotFoundException("Genre", "id", id);
-        }
-
-        model.addAttribute(AttributeNames.GENRE, genre);
-        return ViewNames.VIEW_GENRE;
+        return genreService.getGenreById(genreId);
     }
 
 
-    @GetMapping(MappingNames.ADD_GENRE)
-    public String addEditGenre(@RequestParam(required = false, defaultValue = "-1") Long id, Model model) {
+    @PostMapping
+    public Genre createGenre(@Valid @RequestBody Genre genre) {
 
-        Genre genre = genreService.getGenreById(id);
+        return genreService.addGenre(genre);
+    }
 
-        if (genre == null) {
-            genre = new Genre();
-        }
+    @PutMapping("/{genreId}")
+    public Genre updateGenre(@PathVariable Long genreId, @Valid @RequestBody Genre genreDetails) {
 
-        model.addAttribute(AttributeNames.GENRE, genre);
-        return ViewNames.ADD_GENRE;
+        return genreService.updateGenre(genreId, genreDetails);
     }
 
 
-    @PostMapping(MappingNames.ADD_GENRE)
-    public String processGenre(@Valid @ModelAttribute(AttributeNames.GENRE) Genre genre) {
-
-        if (genre.getId() == null) {
-            genreService.addGenre(genre);
-        } else {
-            genreService.updateGenre(genre);
-        }
-
-        return "redirect:/" + MappingNames.GENRES;
-    }
-
-
-    @GetMapping(MappingNames.DELETE_GENRE)
-    public String deleteGenre(@RequestParam Long id) {
-        genreService.deleteGenreById(id);
-        return "redirect:/" + MappingNames.GENRES;
+    @DeleteMapping("/{genreId}")
+    public ResponseEntity<?> deleteGenre(@PathVariable Long genreId) {
+        genreService.deleteGenreById(genreId);
+        return ResponseEntity.ok().build();
     }
 }

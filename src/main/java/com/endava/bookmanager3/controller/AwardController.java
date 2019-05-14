@@ -1,20 +1,16 @@
 package com.endava.bookmanager3.controller;
 
-import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Award;
 import com.endava.bookmanager3.service.AwardService;
-import com.endava.bookmanager3.util.AttributeNames;
-import com.endava.bookmanager3.util.MappingNames;
-import com.endava.bookmanager3.util.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/awards")
 public class AwardController {
 
     private final AwardService awardService;
@@ -26,59 +22,36 @@ public class AwardController {
     }
 
 
-    @GetMapping(MappingNames.AWARDS)
-    public String getAwards(Model model) {
+    @GetMapping
+    public List<Award> getAwards() {
 
-        List<Award> awards = awardService.getAwards();
-        model.addAttribute(AttributeNames.AWARDS, awards);
-        return ViewNames.AWARDS;
+        return awardService.getAwards();
     }
 
 
-    @GetMapping(MappingNames.VIEW_AWARD)
-    public String getAward(@RequestParam Long id, Model model) {
+    @GetMapping("/{awardId}")
+    public Award getAward(@PathVariable Long awardId) {
 
-        Award award = awardService.getAwardById(id);
-
-        if (award == null) {
-            throw new ResourceNotFoundException("Award", "id", id);
-        }
-
-        model.addAttribute(AttributeNames.AWARD, award);
-        return ViewNames.VIEW_AWARD;
+        return awardService.getAwardById(awardId);
     }
 
 
-    @GetMapping(MappingNames.ADD_AWARD)
-    public String addEditAward(@RequestParam(required = false, defaultValue = "-1") Long id, Model model) {
+    @PostMapping
+    public Award createAward(@Valid @RequestBody Award award) {
 
-        Award award = awardService.getAwardById(id);
+        return awardService.addAward(award);
+    }
 
-        if (award == null) {
-            award = new Award();
-        }
+    @PutMapping("/{awardId}")
+    public Award updateAward(@PathVariable Long awardId, @Valid @RequestBody Award awardDetails) {
 
-        model.addAttribute(AttributeNames.AWARD, award);
-        return ViewNames.ADD_AWARD;
+        return awardService.updateAward(awardId, awardDetails);
     }
 
 
-    @PostMapping(MappingNames.ADD_AWARD)
-    public String processAward(@Valid @ModelAttribute(AttributeNames.AWARD) Award award) {
-
-        if (award.getId() == null) {
-            awardService.addAward(award);
-        } else {
-            awardService.updateAward(award);
-        }
-
-        return "redirect:/" + MappingNames.AWARDS;
-    }
-
-
-    @GetMapping(MappingNames.DELETE_AWARD)
-    public String deleteAward(@RequestParam Long id) {
-        awardService.deleteAwardById(id);
-        return "redirect:/" + MappingNames.AWARDS;
+    @DeleteMapping("/{awardId}")
+    public ResponseEntity<?> deleteAward(@PathVariable Long awardId) {
+        awardService.deleteAwardById(awardId);
+        return ResponseEntity.ok().build();
     }
 }

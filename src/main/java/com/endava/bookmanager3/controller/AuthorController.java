@@ -1,22 +1,18 @@
 package com.endava.bookmanager3.controller;
 
-import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Author;
 import com.endava.bookmanager3.service.AuthorService;
-import com.endava.bookmanager3.util.AttributeNames;
-import com.endava.bookmanager3.util.MappingNames;
-import com.endava.bookmanager3.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
+@RequestMapping("/api/authors")
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -28,64 +24,37 @@ public class AuthorController {
     }
 
 
-    @GetMapping(MappingNames.AUTHORS)
-    public String getAuthors(Model model) {
+    @GetMapping
+    public List<Author> getAuthors() {
 
-        List<Author> authors = authorService.getAuthors();
-        model.addAttribute(AttributeNames.AUTHORS, authors);
-        return ViewNames.AUTHORS;
+        return authorService.getAuthors();
     }
 
 
-    @GetMapping(MappingNames.VIEW_AUTHOR)
-    public String getAuthor(@RequestParam Long id, Model model) {
+    @GetMapping("/{authorId}")
+    public Author getAuthor(@PathVariable Long authorId) {
 
-        Author author = authorService.getAuthorById(id);
-
-        if (author == null) {
-            throw new ResourceNotFoundException("Author", "id", id);
-        }
-
-        model.addAttribute(AttributeNames.AUTHOR, author);
-        return ViewNames.VIEW_AUTHOR;
+        return authorService.getAuthorById(authorId);
     }
 
 
-    @GetMapping(MappingNames.ADD_AUTHOR)
-    public String addEditAuthor(@RequestParam(required = false, defaultValue = "-1") Long id, Model model) {
+    @PostMapping
+    public Author createAuthor(@Valid @RequestBody Author author) {
 
-        Author author = authorService.getAuthorById(id);
-
-        if (author == null) {
-                author = new Author();
-        }
-
-        model.addAttribute(AttributeNames.AUTHOR, author);
-        return ViewNames.ADD_AUTHOR;
+        return authorService.addAuthor(author);
     }
 
 
-    @PostMapping(MappingNames.ADD_AUTHOR)
-    public String processAuthor(@Valid @ModelAttribute(AttributeNames.AUTHOR) Author author) {
+    @PutMapping("/{authorId}")
+    public Author updateAuthor(@PathVariable Long authorId, @Valid @RequestBody Author authorDetails) {
 
-        log.info("got into post");
-
-        if (author.getId() == null) {
-            log.info("got into save post");
-            authorService.addAuthor(author);
-        } else {
-            log.info("got into update post");
-            authorService.updateAuthor(author);
-        }
-
-        log.info("before returning to authors");
-        return "redirect:/" + MappingNames.AUTHORS;
+        return authorService.updateAuthor(authorId, authorDetails);
     }
 
 
-    @GetMapping(MappingNames.DELETE_AUTHOR)
-    public String deleteAuthor(@RequestParam Long id) {
-        authorService.deleteAuthorById(id);
-        return "redirect:/" + MappingNames.AUTHORS;
+    @DeleteMapping("/{authorId}")
+    public ResponseEntity<?> deleteAuthor(@PathVariable Long authorId) {
+        authorService.deleteAuthorById(authorId);
+        return ResponseEntity.ok().build();
     }
 }

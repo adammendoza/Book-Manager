@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.service;
 
-import com.endava.bookmanager3.exception.AppException;
+import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Review;
 import com.endava.bookmanager3.repository.IReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,36 +26,27 @@ public class ReviewService {
 
     public Review getReviewById(Long id) {
 
-        return reviewRepository.findById(id).orElse(null);
+        return reviewRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Review", "id", id));
     }
 
-    public void addReview(Review reviewToAdd) {
+    public Review addReview(Review reviewToAdd) {
 
-        reviewRepository.save(reviewToAdd);
+        return reviewRepository.save(reviewToAdd);
     }
 
-    public void updateReview(Review modifiedReview) {
+    public Review updateReview(Long id, Review modifiedReview) {
 
-        Review reviewToUpdate = reviewRepository.findById(modifiedReview.getId()).orElse(null);
-
-        if (reviewToUpdate == null) {
-            throw new AppException("Review to update not found!");
-        }
-
+        Review reviewToUpdate = reviewRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Review", "id", id));
         reviewToUpdate.setDescription(modifiedReview.getDescription());
         reviewToUpdate.setRating((modifiedReview.getRating()));
         reviewToUpdate.setBook(modifiedReview.getBook());
         reviewToUpdate.setUser(modifiedReview.getUser());
-        reviewRepository.save(reviewToUpdate);
+        return reviewRepository.save(reviewToUpdate);
     }
 
     public void deleteReviewById(Long id) {
 
-        Review reviewToDelete = reviewRepository.findById(id).orElse(null);
-
-        if (reviewToDelete == null)
-            throw new AppException("Review to delete not found!");
-
+        Review reviewToDelete = reviewRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Review", "id", id));
         reviewRepository.delete(reviewToDelete);
     }
 }

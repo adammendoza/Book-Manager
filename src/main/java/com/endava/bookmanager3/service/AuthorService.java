@@ -1,6 +1,6 @@
 package com.endava.bookmanager3.service;
 
-import com.endava.bookmanager3.exception.AppException;
+import com.endava.bookmanager3.exception.ResourceNotFoundException;
 import com.endava.bookmanager3.model.Author;
 import com.endava.bookmanager3.repository.IAuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +26,26 @@ public class AuthorService {
 
     public Author getAuthorById(Long id) {
 
-        return authorRepository.findById(id).orElse(null);
+        return authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author", "id", id));
     }
 
-    public void addAuthor(Author authorToAdd) {
-        authorRepository.save(authorToAdd);
+    public Author addAuthor(Author authorToAdd) {
+
+        return authorRepository.save(authorToAdd);
     }
 
-    public void updateAuthor(Author modifiedAuthor) {
+    public Author updateAuthor(Long id, Author modifiedAuthor) {
 
-        Author authorToUpdate = authorRepository.findById(modifiedAuthor.getId()).orElse(null);
-
-        if (authorToUpdate == null) {
-            throw new AppException("Author to update not found!");
-        }
-
+        Author authorToUpdate = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author", "id", id));
         authorToUpdate.setName(modifiedAuthor.getName());
         authorToUpdate.setEmail(modifiedAuthor.getEmail());
         authorToUpdate.setDescription(modifiedAuthor.getDescription());
-        authorRepository.save(authorToUpdate);
+        return authorRepository.save(authorToUpdate);
     }
 
     public void deleteAuthorById(Long id) {
 
-        Author authorToDelete = authorRepository.findById(id).orElse(null);
-
-        if (authorToDelete == null)
-            throw new AppException("Author to delete not found!");
-
+        Author authorToDelete = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Author", "id", id));
         authorRepository.delete(authorToDelete);
     }
 }
